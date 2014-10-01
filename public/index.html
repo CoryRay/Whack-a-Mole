@@ -4,52 +4,87 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>WHACK!</title>
+        <link rel="shortcut icon" href="img/favicon.ico">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!-- // <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <style>
+             .hole {
+                border: 2px solid yellow;
+                height: 100px;
+                width: 100px;
+            }
+             .mole {
+                background-color: blue;
+            }
+        </style>
     </head>
     <body style='background-color: #fa3600'>
         <div class='container'>
+            <h2>Whack That Mole!</h2>
             <div class='row'>
-                <div class='col-md-4'>
-                    <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!">
+                <div class='col-xs-4 hole' id='1'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='2'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='3'>
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-4'>
-                    <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!">
+                <div class='col-xs-4 hole'id ='4'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='5'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='6'>
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-4'>
-                    <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!">
+                <div class='col-xs-4 hole'id ='7'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='8'>
                 </div>
-                <div class='col-md-4'>
-                    <!-- <img id='kornheiser' class='img-responsive' src="img/will_it_ever_end.png" alt="Whack this mole!!"> -->
+                <div class='col-xs-4 hole'id ='9'>
                 </div>
             </div>
         </div>
+
+            <p>Score: <span id='score'>0</span></p>
+        
         <script>
 
-            $('#kornheiser').click(function(event) {
-                $(this).slideToggle('linear');
-            });
+        var score = 0;
+
+        // $('.mole').click(moleDisappear);
+
+        $('.container').on('click', '.mole', moleDisappear);
+        
+        function moleDisappear() {
+            $('.hole').removeClass('mole');
+
+            score++;
+            $('#score').text(score);
+            console.log('Mole went away...');
+        };
+        
+        $(function() {
+
+            moleAppear();
+
+            //everything here runs every second
+            function moleAppear() {
+                //gets a random int from 1-9 and sets it to boxNum
+                var boxNum = Math.floor(Math.random() * (10 - 1)) + 1;
+
+                $('.hole').removeClass('mole');
+
+                //when boxNum corresponds to an id, add css property
+                $('#' + boxNum).addClass('mole');
+
+                console.log('Box number: ' + boxNum);
+                setTimeout(moleAppear, 1000);
+            } 
+        });
 
         </script>
     </body>
